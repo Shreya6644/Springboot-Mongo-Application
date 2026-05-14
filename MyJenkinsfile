@@ -37,11 +37,12 @@ stages{
             sshagent(['c1aa45a1-5202-464a-bb9f-459a44765a20']){
                 sh "ssh -o StrictHostKeyChecking=no ubuntu@16.112.60.185"
                 withCredentials([usernamePassword(credentialsId: '25b27a43-d204-4067-b8a8-de978ee5523b', passwordVariable: 'password', usernameVariable: 'user')]) {
-                sh "docker login -u ${user} -p ${password}"
-                sh "docker run -dit --name springapp -p 8080:8080 springboot-app:1"
+                  sh "docker login -u ${user} -p ${password}"
+                  sh "docker run -dit --name springapp -p 8080:8080 springboot-app:1"
         }
     }
         
     }   
+}
 }
 }
