@@ -35,10 +35,11 @@ stages{
     stage("Deployment"){
         steps{
             sshagent(['c1aa45a1-5202-464a-bb9f-459a44765a20']){
-                sh "scp -o StrictHostKeyChecking=no ec2-user@16.112.60.185 \
+                sh "ssh -o StrictHostKeyChecking=no ec2-user@16.112.60.185"
                 sh "docker run -dit --name springapp -p 8080:8080 springboot-app:1"
         }
     }
         
     }   
+}
 }
