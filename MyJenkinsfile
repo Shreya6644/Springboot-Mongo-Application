@@ -1,0 +1,44 @@
+pipeline{
+    agent any
+tools{
+    maven "maven"
+}
+stages{
+    stage("checkout"){
+        steps{
+            checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '0073f30d-a1a0-4257-92fb-6f36cc0b2b06', url: 'https://github.com/Shreya6644/Springboot-Mongo-Application.git']])
+        }
+    }
+    stage("build"){
+        steps{
+            sh "mvn clean package"
+        }
+    }
+    stage("Imagebuild"){
+        steps{
+           sh "docker build -f MyDockerfile -t devops0211/springboot-app:1 ." 
+}
+        }
+    stage("dockerhubAuth"){
+        steps{
+            withCredentials([usernamePassword(credentialsId: '25b27a43-d204-4067-b8a8-de978ee5523b', passwordVariable: 'password', usernameVariable: 'user')]) {
+                sh "docker login -u ${user} -p ${password}"
+
+        }
+    }
+}
+    stage("dockerpush"){
+        steps{
+            sh "docker push devops0211/springboot-app:1"
+        }
+    }
+    stage("Deployment"){
+        steps{
+            sshagent(['c1aa45a1-5202-464a-bb9f-459a44765a20']){
+                sh "scp -o StrictHostKeyChecking=no ec2-user@16.112.60.185 \
+                sh "docker run -dit --name springapp -p 8080:8080 springboot-app:1"
+        }
+    }
+        
+    }   
+}
