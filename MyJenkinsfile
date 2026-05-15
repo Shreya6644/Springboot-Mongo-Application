@@ -34,6 +34,15 @@ stages{
             sh "docker push devops0211/springboot-app:1"
         }
     }
+    stage("debug"){
+       steps{
+         sh '''
+           whoami
+           hostname
+           groups
+          '''
+       }
+    }
     stage("Deployment"){
         steps{
             sshagent(['c1aa45a1-5202-464a-bb9f-459a44765a20']){
