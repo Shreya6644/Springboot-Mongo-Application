@@ -36,7 +36,7 @@ stages{
         steps{
             sshagent(['c1aa45a1-5202-464a-bb9f-459a44765a20']){
                 sh '''
-            ssh -o StrictHostKeyChecking=no ubuntu@16.112.60.185 << EOF
+            ssh -o StrictHostKeyChecking=no ubuntu@16.112.161.13 << EOF
 
             docker stop springapp || true
             docker rm springapp || true
