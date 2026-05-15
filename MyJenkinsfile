@@ -61,6 +61,7 @@ stages{
             -e MONGO_DB_USERNAME=dbuser \
             -e MONGO_DB_PASSWORD=db@123 \
             -p 8080:8080 \
+            --network my-network \
             devops0211/springboot-app:1
 
             docker ps
