@@ -57,7 +57,7 @@ stages{
 
             docker run -dit \
             --name springapp \
-            -e MONGO_DB_HOSTNAME=16.112.161.13 \
+            -e MONGO_DB_HOSTNAME=172.18.0.2 \
             -e MONGO_DB_USERNAME=dbuser \
             -e MONGO_DB_PASSWORD=db@123 \
             -p 8080:8080 \
